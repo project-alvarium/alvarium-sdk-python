@@ -5,18 +5,17 @@ from alvarium.sdk import Sdk
 class MockSdk(Sdk):
     """mock implementation of the sdk interface"""
 
-    def create(self, data, properties=None) -> None:
-        print("data created")
+    def create(self, data: bytes, properties=None) -> None:
+        pass
 
-    def mutate(self, old_data, new_data, properties=None) -> None:
-        print("data mutated")
-
-    def transit(self, data, properties=None) -> None:
-        print("data transitioned")
+    def mutate(self, old_data: bytes, new_data: bytes, properties=None) -> None:
+        pass
     
-    def close(self) -> None:
-        print("sdk disposed")
+    def transit(self, data: bytes, properties=None) -> None:
+        pass
 
+    def close(self) -> None:
+        pass
 class TestSdk(unittest.TestCase):
     
     def setUp(self) -> None:
@@ -24,7 +23,7 @@ class TestSdk(unittest.TestCase):
 
     def test_sdk_should_create(self) -> None:
         """always true test case"""
-        self.sdk.create(data=[])
+        self.sdk.create(data=b'test')
         self.assertTrue(True)
     
     def tearDown(self) -> None:
