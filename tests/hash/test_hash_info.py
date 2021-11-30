@@ -7,7 +7,7 @@ class TestHashInfo(unittest.TestCase):
 
     def test_to_json_should_return_json_representation(self):
         hash_info = HashInfo(type=HashType.MD5)
-        test_json = ""
+        test_json = {} 
         with open("./tests/hash/hash_info.json", "r") as file:
             test_json = json.loads(file.read()) 
 

@@ -12,9 +12,9 @@ class HashProviderFactory:
     def getProvider(self, hash_type: HashType) -> HashProvider:
         if hash_type == HashType.NONE:
             return NoneHashProvider() 
-        if hash_type == HashType.SHA256:
+        elif hash_type == HashType.SHA256:
             return SHA256Provider()
-        if hash_type == HashType.MD5:
+        elif hash_type == HashType.MD5:
             return MD5Provider()
         else:
             raise HashException(f'{hash_type} is not implemented')
