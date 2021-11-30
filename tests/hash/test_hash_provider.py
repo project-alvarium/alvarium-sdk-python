@@ -24,6 +24,16 @@ class TestHashProvider(unittest.TestCase):
         result = hash_provider.derive(test_string)
         self.assertEqual(result, test_string_hex)
 
+    def test_md5_provider_should_return_hex_of_hashed_data(self):
+        factory = HashProviderFactory()
+        hash_provider: HashProvider = factory.getProvider(HashType.MD5)
+
+        test_string = b"this is a test"
+        test_string_hex = "54b0c58c7ce9f2a8b551351102ee0938" #ground truth
+        result = hash_provider.derive(test_string)
+        self.assertEqual(result, test_string_hex)
+
+
 
 if __name__ == "__main__":
     unittest.main()
