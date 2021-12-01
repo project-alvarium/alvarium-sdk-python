@@ -1,0 +1,10 @@
+{
+    "public": {
+      "type": "ed25519",
+      "path": "/path"
+    },
+    "private": {
+      "type": "none",
+      "path": "/path"
+    }
+  }
