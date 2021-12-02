@@ -9,6 +9,6 @@ class SignProvider(ABC):
         pass
 
     @abstractmethod
-    def verify(self, key: bytes, content: bytes, signed: bytes) -> str:
+    def verify(self, key: bytes, content: bytes, signed: bytes) -> bool:
         """a function for verifying the data"""
         pass
