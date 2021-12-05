@@ -1,0 +1,5 @@
+{
+  "host": "localhost",
+  "protocol": "tcp",
+  "port": 1883
+}

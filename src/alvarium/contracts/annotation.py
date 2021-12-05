@@ -32,6 +32,8 @@ class Annotation:
     id: ulid.ULID = ulid.new()
 
     def to_json(self) -> str:
+        # TODO (karim elghamry): check if signature is present before serializing
+        # if not present, return json without the signature prop
         annotation_json = {"id": str(self.id), "key": str(self.key), "hash": str(self.hash),
                            "host": str(self.host), "kind": str(self.kind), "signature": str(self.signature),
                            "isSatisfied": self.is_satisfied, "timestamp": str(self.timestamp)}
