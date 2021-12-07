@@ -6,7 +6,7 @@
     "user": "",
     "password": "",
     "provider": {
-      "host": "test.mosquitto.org",
+      "host": "localhost",
       "protocol": "tcp",
       "port": 1883
     },
