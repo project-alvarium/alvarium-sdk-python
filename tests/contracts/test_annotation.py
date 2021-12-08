@@ -7,7 +7,7 @@ class TestAnnotation(unittest.TestCase):
 
     def test_to_json_should_return_json_representation(self):
         annotation = Annotation(key="KEY", hash=HashType.NONE, host="host",
-                                kind=AnnotationType.MOCK,signature= "SIGN" ,is_satisfied=True)
+                                kind=AnnotationType.MOCK,signature= "SIGN", is_satisfied=True)
         test_json = {} 
         with open("./tests/contracts/annotation.json", "r") as file:
             test_json = json.loads(file.read())
@@ -20,6 +20,13 @@ class TestAnnotation(unittest.TestCase):
         self.assertEqual(test_json["kind"], result["kind"])
         self.assertEqual(test_json["signature"], result["signature"])
         self.assertEqual(test_json["isSatisfied"], result["isSatisfied"])
+    
+    def test_to_json_should_omit_empty_signature(self):
+        annotation = Annotation(key="KEY", hash=HashType.NONE, host="host",
+                                kind=AnnotationType.MOCK, is_satisfied=True)
+        
+        annotation_json = json.loads(annotation.to_json())
+        self.assertRaises(KeyError, lambda: annotation_json["signature"])
 
     
     def test_from_json_should_return_annotation_object(self):

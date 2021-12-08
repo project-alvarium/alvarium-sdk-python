@@ -26,17 +26,22 @@ class Annotation:
     hash: HashType
     host: str
     kind: AnnotationType 
-    signature: str
-    is_satisfied: bool
     timestamp: str = datetime.now(timezone.utc).astimezone().isoformat()
     id: ulid.ULID = ulid.new()
+    is_satisfied: bool = None
+    signature: str = None
 
     def to_json(self) -> str:
-        # TODO (karim elghamry): check if signature is present before serializing
-        # if not present, return json without the signature prop
         annotation_json = {"id": str(self.id), "key": str(self.key), "hash": str(self.hash),
-                           "host": str(self.host), "kind": str(self.kind), "signature": str(self.signature),
-                           "isSatisfied": self.is_satisfied, "timestamp": str(self.timestamp)}
+                           "host": str(self.host), "kind": str(self.kind),
+                           "timestamp": str(self.timestamp)}
+        
+        if self.signature != None:
+            annotation_json["signature"] = str(self.signature)
+        
+        if self.is_satisfied != None:
+            annotation_json["isSatisfied"] = self.is_satisfied
+
         return json.dumps(annotation_json)
 
     @staticmethod
