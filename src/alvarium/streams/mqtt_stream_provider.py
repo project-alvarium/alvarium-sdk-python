@@ -43,7 +43,7 @@ class MQTTStreamProvider( StreamProvider ):
                 if not message_info.is_published():     
                     raise StreamException (  'Message was not published' )
             except ValueError as e:
-                raise StreamException ( e.args[0] )
+                raise StreamException (f"cannot publish to topic {topic}.", e) 
             
             
             

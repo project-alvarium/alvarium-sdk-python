@@ -12,7 +12,7 @@ class Ed25519ignProvider(SignProvider):
         key = key[:32]
         loaded_private_key = ed25519.Ed25519PrivateKey.from_private_bytes(key)
 
-        return loaded_private_key.sign(content)
+        return bytes.hex(loaded_private_key.sign(content)) 
 
     def verify(self, key: bytes, content: bytes, signed: bytes) -> bool:
 

@@ -61,7 +61,7 @@ class TestSignProvider(unittest.TestCase):
             private_key_bytes, bytes(test_string, "utf-8"))
 
         verification_status = sign_provider.verify(
-            public_key_bytes, bytes(test_string, "utf-8"), signed_test_string)
+            public_key_bytes, bytes(test_string, "utf-8"), bytes.fromhex(signed_test_string))
 
         self.assertEqual(verification_status, True)
 
@@ -85,7 +85,7 @@ class TestSignProvider(unittest.TestCase):
             private_key_bytes, bytes(test_string, "utf-8"))
 
         verification_status = sign_provider.verify(
-            wrong_public_key_bytes, bytes(test_string, "utf-8"), signed_test_string)
+            wrong_public_key_bytes, bytes(test_string, "utf-8"), bytes.fromhex(signed_test_string))
 
         self.assertEqual(verification_status, False)
 
@@ -108,7 +108,7 @@ class TestSignProvider(unittest.TestCase):
             private_key_bytes, bytes(test_string, "utf-8"))
 
         verification_status = sign_provider.verify(
-            public_key_bytes, bytes(test_string, "utf-8"), signed_test_string)
+            public_key_bytes, bytes(test_string, "utf-8"), bytes.fromhex(signed_test_string))
 
         self.assertEqual(verification_status, True)
 
