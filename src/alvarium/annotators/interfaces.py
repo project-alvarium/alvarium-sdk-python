@@ -7,5 +7,5 @@ class Annotator(ABC):
     """A unit responsible for annontating raw data and producing an Annotation object"""
 
     @abstractmethod
-    def execute(self, ctx: PropertyBag, data: bytes) -> Annotation:
+    def execute(self, data:bytes, ctx: PropertyBag = None) -> Annotation:
         pass

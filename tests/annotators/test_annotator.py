@@ -16,7 +16,7 @@ class AnnotatorTest(unittest.TestCase):
         string = "test data"
         data = bytearray(string.encode())
         ctx = ImmutablePropertyBag({})
-        annotation = annotator.execute(ctx, data)
+        annotation = annotator.execute(data=data, ctx=ctx)
 
         self.assertEqual(type(annotation), Annotation)
 

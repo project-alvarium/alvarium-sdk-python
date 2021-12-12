@@ -21,7 +21,7 @@ class MockAnnotator(Annotator):
         self.signature = signature
         self.kind = kind
 
-    def execute(self, ctx: PropertyBag, data: bytes) -> Annotation:
+    def execute(self, data: bytes, ctx: PropertyBag = None) -> Annotation:
         hashFactory = HashProviderFactory()
 
         try:
