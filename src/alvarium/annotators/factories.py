@@ -5,6 +5,7 @@ from alvarium.hash.contracts import HashType
 from .exceptions import AnnotatorException
 from .mock import MockAnnotator
 from .tpm import TpmAnnotator
+from .source import SourceAnnotator
 
 class AnnotatorFactory():
 
@@ -14,6 +15,8 @@ class AnnotatorFactory():
             return MockAnnotator(hash=hash, signature=signature, kind=kind)
         elif kind == AnnotationType.TPM:
             return TpmAnnotator(hash=hash, sign_info=signature)
+        elif kind == AnnotationType.SOURCE:
+            return SourceAnnotator(hash=hash, sign_info=signature)
         else:
             raise AnnotatorException("Annotator type is not supported")
             
