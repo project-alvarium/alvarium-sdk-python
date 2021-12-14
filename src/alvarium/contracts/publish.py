@@ -1,4 +1,5 @@
 import json
+import base64
 
 from enum import Enum
 from dataclasses import dataclass
@@ -22,9 +23,10 @@ class PublishWrapper:
     content: Any
 
     def to_json(self) -> str:
-        # TODO (karim elghamry): encode content to base64 before serializing
+        # content is first encoded to base64 to match the go sdk implementation
+        content = base64.b64encode(bytes(str(self.content), 'utf-8')).decode('utf-8')
         wrapper_json = {"action": str(self.action), "messageType": str(self.message_type), 
-                        "content": json.loads(str(self.content))}
+                        "content": str(content)}
         return json.dumps(wrapper_json)
     
     def __str__(self) -> str:

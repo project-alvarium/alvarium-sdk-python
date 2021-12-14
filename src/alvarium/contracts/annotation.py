@@ -70,5 +70,5 @@ class AnnotationList:
         return AnnotationList(items=[Annotation.from_json(json.dumps(item)) for item in annotation_list_json["items"]])
 
     def __str__(self) -> str:
-        self.to_json() 
+        return self.to_json() 
     
