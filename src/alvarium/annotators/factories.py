@@ -1,12 +1,13 @@
 from .interfaces import Annotator
-from alvarium.annotators.tls_anotator import TlsAnotator
 from alvarium.contracts.annotation import AnnotationType
 from alvarium.sign.contracts import SignInfo
 from alvarium.hash.contracts import HashType
 from .exceptions import AnnotatorException
 from .mock import MockAnnotator
 from .tpm import TpmAnnotator
+from .pki import PkiAnnotator
 from .source import SourceAnnotator
+from .tls import TlsAnnotator
 
 class AnnotatorFactory():
 
@@ -19,7 +20,9 @@ class AnnotatorFactory():
         elif kind == AnnotationType.SOURCE:
             return SourceAnnotator(hash=hash, sign_info=signature)
         elif kind == AnnotationType.TLS:
-            return TlsAnotator(hash=hash, signature=signature)
+            return TlsAnnotator(hash=hash, signature=signature)
+        elif kind == AnnotationType.PKI:
+            return PkiAnnotator(hash=hash, sign_info=signature)
         else:
             raise AnnotatorException("Annotator type is not supported")
             

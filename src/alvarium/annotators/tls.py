@@ -11,7 +11,7 @@ from alvarium.utils import PropertyBag
 import socket
 
 
-class TlsAnotator(Annotator):
+class TlsAnnotator(Annotator):
     hash: HashType
     signature: SignInfo
     kind: AnnotationType
