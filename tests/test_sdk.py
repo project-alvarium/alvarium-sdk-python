@@ -27,28 +27,32 @@ class TestSdk(unittest.TestCase):
         self.test_json = {}
         with open("./tests/mock-info.json", "r") as file:
             self.test_json = json.loads(file.read())
-        self.sdk = MockSdk()
 
     def test_default_sdk_instantiate_should_not_raise(self):
-        sdkInfo: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))
+        sdk_info: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))
         
         annotators: List[Annotator] = []
-        for i in range (0,len(sdkInfo.annotators)):
-            annotators.append(AnnotatorFactory().getAnnotator(kind = sdkInfo.annotators[i],hash = sdkInfo.hash, signature = sdkInfo.signature))
+        for i in range (0,len(sdk_info.annotators)):
+            annotators.append(AnnotatorFactory().getAnnotator(kind=sdk_info.annotators[i], sdk_info=sdk_info))
 
         logger = logging.getLogger(__name__)
         logging.basicConfig(level = logging.DEBUG)
 
-        sdk: Sdk = DefaultSdk(annotators, sdkInfo, logger)
+        sdk: Sdk = DefaultSdk(annotators=annotators,config=sdk_info,logger=logger)
         sdk.close()
 
     def test_sdk_should_create(self) -> None:
-        """always true test case"""
-        self.sdk.create(data=b'test')
-        self.assertTrue(True)
-    
-    def tearDown(self) -> None:
-        self.sdk.close()
+        sdk_info: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))
+        annotator_factory = AnnotatorFactory()
+        annotators = [annotator_factory.getAnnotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
+
+        logger = logging.getLogger(__name__)
+        logging.basicConfig(level = logging.DEBUG)
+        sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
+
+        test_data = b'test'
+        sdk.create(data=test_data)
+        sdk.close()
 
 if __name__ == "__main__":
     unittest.main()

@@ -18,3 +18,7 @@ clean:
 .PHONY: install
 install: # only there for testing purposes
 	pip install -r requirements.txt
+
+.PHONY: run-example
+run-example:
+	$(PYTHON) ./tests/example

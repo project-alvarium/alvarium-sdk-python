@@ -5,6 +5,8 @@ from .utils import PropertyBag
 from .streams.factories import StreamProviderFactory
 from .annotators.interfaces import Annotator
 from .contracts.config import SdkInfo
+from .contracts.annotation import AnnotationList
+from .contracts.publish import PublishWrapper, SdkAction
 
 class DefaultSdk(Sdk):
     """default implementation of the sdk interface"""
@@ -20,7 +22,12 @@ class DefaultSdk(Sdk):
         self.logger.debug("stream provider connected successfully")
 
     def create(self, data: bytes, properties: PropertyBag = None) -> None:
-        self.logger.debug("data created")
+        annotation_list = AnnotationList(items=[ann.execute(data=data, ctx=properties) for ann in self.annotators])
+        wrapper = PublishWrapper(action=SdkAction.CREATE, message_type=type(annotation_list).__name__, content=annotation_list)
+
+        self.stream.publish(wrapper=wrapper)
+        self.logger.debug("data annotated and published successfully.")
+
 
     def mutate(self, old_data: bytes, new_data: bytes, properties: PropertyBag = None) -> None:
         self.logger.debug("data mutated")

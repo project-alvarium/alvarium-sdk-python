@@ -2,7 +2,7 @@ import ulid
 import json
 
 from typing import List
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from alvarium.hash.contracts import HashType
 from datetime import datetime, timezone
@@ -26,8 +26,8 @@ class Annotation:
     hash: HashType
     host: str
     kind: AnnotationType 
-    timestamp: str = datetime.now(timezone.utc).astimezone().isoformat()
-    id: ulid.ULID = ulid.new()
+    timestamp: str = field(default_factory=lambda : datetime.now(timezone.utc).astimezone().isoformat(), init=True) 
+    id: ulid.ULID = field(default_factory=ulid.new, init=True)
     is_satisfied: bool = None
     signature: str = None
 

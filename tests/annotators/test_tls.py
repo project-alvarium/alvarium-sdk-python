@@ -1,7 +1,8 @@
 import unittest
 
 from alvarium.contracts.annotation import Annotation, AnnotationType
-from alvarium.hash.contracts import HashType
+from alvarium.contracts.config import SdkInfo
+from alvarium.hash.contracts import HashInfo, HashType
 from alvarium.sign.contracts import KeyInfo, SignInfo, SignType
 from alvarium.annotators.factories import AnnotatorFactory
 from alvarium.utils import ImmutablePropertyBag
@@ -10,9 +11,11 @@ import socket
 
 class TlsAnnotatorTest(unittest.TestCase):
     def test_tls_annotator_with_tls_connection_should_return_is_satisfied_true(self):
-        keyInfo = KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key")
+        key_info = KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key")
+        sign_Info = SignInfo(public=key_info, private=key_info)
+        sdk_info = SdkInfo(annotators=[], signature=sign_Info, hash=HashInfo(type=HashType.SHA256), stream=None)
         factory = AnnotatorFactory()
-        annotator = factory.getAnnotator( kind = AnnotationType.TLS, hash = HashType.SHA256, signature = SignInfo(keyInfo, keyInfo))
+        annotator = factory.getAnnotator(kind=AnnotationType.TLS, sdk_info=sdk_info)
         string = "test data"
         data = bytes(string, 'utf-8')
 
@@ -29,9 +32,11 @@ class TlsAnnotatorTest(unittest.TestCase):
 
         
     def test_tls_annotator_without_tls_connection_should_return_is_satisfied_false(self):
-        keyInfo = KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key")
+        key_info = KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key")
+        sign_Info = SignInfo(public=key_info, private=key_info)
+        sdk_info = SdkInfo(annotators=[], signature=sign_Info, hash=HashInfo(type=HashType.SHA256), stream=None)
         factory = AnnotatorFactory()
-        annotator = factory.getAnnotator( kind = AnnotationType.TLS, hash = HashType.SHA256, signature = SignInfo(keyInfo, keyInfo))
+        annotator = factory.getAnnotator(kind=AnnotationType.TLS, sdk_info=sdk_info)
         string = "test data"
         data = bytes(string, 'utf-8')
         

@@ -27,4 +27,4 @@ class HashInfo():
         return HashInfo(type=HashType(info_json["type"]))
     
     def __str__(self) -> str:
-        self.to_json() 
+        return self.to_json() 
