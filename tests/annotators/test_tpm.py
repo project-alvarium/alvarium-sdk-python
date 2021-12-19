@@ -17,7 +17,7 @@ class TestTpmAnnotator(unittest.TestCase):
         sign_info = SignInfo(private=private_key, public=public_key)
         sdk_info = SdkInfo(annotators=[], signature=sign_info, hash=HashInfo(type=hash), stream=[])
 
-        annotator = AnnotatorFactory().getAnnotator(kind=kind, sdk_info=sdk_info)
+        annotator = AnnotatorFactory().get_annotator(kind=kind, sdk_info=sdk_info)
 
         test_data = b"test data"
         result = annotator.execute(data=test_data)

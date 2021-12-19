@@ -1,13 +1,15 @@
 import socket
 
-from .interfaces import Annotator
-from .utils import derive_hash, sign_annotation
 from alvarium.hash.contracts import HashType
 from alvarium.contracts.annotation import Annotation, AnnotationType
 from alvarium.sign.contracts import SignInfo
 from alvarium.utils import PropertyBag
+from .interfaces import Annotator
+from .utils import derive_hash, sign_annotation
 
 class SourceAnnotator(Annotator):
+    """ A unit used to provide lineage from one version of data to another as a result of
+        change or transformation"""
     
     def __init__(self, hash: HashType, sign_info: SignInfo) -> None:
         self.hash = hash

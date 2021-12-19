@@ -1,12 +1,12 @@
-from alvarium.streams.exceptions import StreamException
-from alvarium.streams.mock import MockProvider
-from alvarium.streams.mqtt_stream_provider import MQTTStreamProvider
+from .exceptions import StreamException
+from .mock import MockProvider
+from .mqtt import MQTTStreamProvider
 from .contracts import StreamInfo, StreamType
 
 class StreamProviderFactory:
     """A factory that returns a specific implementation of a StreamProvider"""
 
-    def getProvider(self, info: StreamInfo):
+    def get_provider(self, info: StreamInfo):
         if info.type == StreamType.MOCK:
             return MockProvider()
         if info.type == StreamType.MQTT:

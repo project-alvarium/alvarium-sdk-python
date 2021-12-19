@@ -2,11 +2,11 @@ import socket
 
 from alvarium.contracts.annotation import Annotation, AnnotationType
 from alvarium.hash.contracts import HashType
+from alvarium.sign.contracts import SignInfo
 from alvarium.utils import PropertyBag
+from os import path
 from .interfaces import Annotator
 from .utils import derive_hash, sign_annotation
-from alvarium.sign.contracts import SignInfo
-from os import path
 
 class TpmAnnotator(Annotator):
 

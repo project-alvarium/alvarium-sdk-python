@@ -10,11 +10,11 @@ from alvarium.utils import ImmutablePropertyBag
 class AnnotatorTest(unittest.TestCase):
 
     def test_mock_Annotator_Should_Return_Annotation(self):
-        keyInfo = KeyInfo(type=SignType.NONE,path="path")
-        signature = SignInfo(keyInfo, keyInfo)
+        key_info = KeyInfo(type=SignType.NONE,path="path")
+        signature = SignInfo(key_info, key_info)
         sdk_info = SdkInfo(annotators=[], hash=HashInfo(type=HashType.MD5), signature=signature, stream=None)
         factory = AnnotatorFactory()
-        annotator = factory.getAnnotator(kind=AnnotationType.MOCK,sdk_info=sdk_info)
+        annotator = factory.get_annotator(kind=AnnotationType.MOCK,sdk_info=sdk_info)
         string = "test data"
         data = bytearray(string.encode())
         ctx = ImmutablePropertyBag({})

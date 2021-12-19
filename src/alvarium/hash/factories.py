@@ -1,5 +1,5 @@
-from .sha256_provider import SHA256Provider
-from .md5_provider import MD5Provider
+from .sha256 import SHA256Provider
+from .md5 import MD5Provider
 from .exceptions import HashException
 from .mock import NoneHashProvider
 from .contracts import HashType
@@ -9,7 +9,7 @@ class HashProviderFactory:
     """A factory that provides a way to instaniate different types of
     Hash Providers."""
 
-    def getProvider(self, hash_type: HashType) -> HashProvider:
+    def get_provider(self, hash_type: HashType) -> HashProvider:
         if hash_type == HashType.NONE:
             return NoneHashProvider() 
         elif hash_type == HashType.SHA256:

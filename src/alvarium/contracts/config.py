@@ -1,11 +1,11 @@
 import json
 
 from dataclasses import dataclass
+from typing import List
 from alvarium.hash.contracts import HashInfo
-from .annotation import AnnotationType
 from alvarium.sign.contracts import SignInfo
 from alvarium.streams.contracts import StreamInfo
-from typing import List
+from .annotation import AnnotationType
 
 @dataclass
 class SdkInfo:

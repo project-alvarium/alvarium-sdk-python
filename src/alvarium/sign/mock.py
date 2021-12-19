@@ -1,6 +1,6 @@
 from .interfaces import SignProvider
 class NoneSignProvider(SignProvider):
-    """A mock implementation for the none sign provider interface"""
+    """A mock implementation for the sign provider interface"""
     
     def sign(self, content: bytes) -> str:
         return content.decode("utf-8") 

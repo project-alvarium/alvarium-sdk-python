@@ -3,11 +3,11 @@ from abc import ABC, abstractmethod
 class PropertyBag(ABC):
 
     @abstractmethod
-    def getProperty(self, key: str): 
+    def get_property(self, key: str): 
         pass
 
     @abstractmethod
-    def toMap(self) -> dict:
+    def to_map(self) -> dict:
         pass
 
 class ImmutablePropertyBag(PropertyBag):
@@ -15,11 +15,11 @@ class ImmutablePropertyBag(PropertyBag):
     def __init__(self, bag: dict) -> None:
         self.bag = bag
 
-    def getProperty(self, key: str):
+    def get_property(self, key: str):
         if key in self.bag:
             return self.bag.get(key)
         else:
             raise ValueError(f'Property {key} not found')
 
-    def toMap(self):
+    def to_map(self) -> dict:
         return self.bag

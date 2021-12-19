@@ -10,7 +10,7 @@ class TestStreamProvider(unittest.TestCase):
         stream_info = StreamInfo(type=StreamType.MOCK, config={})
 
         factory = StreamProviderFactory()
-        provider = factory.getProvider(info=stream_info)
+        provider = factory.get_provider(info=stream_info)
 
         result = provider.connect()
         self.assertEqual(result, None)
@@ -19,7 +19,7 @@ class TestStreamProvider(unittest.TestCase):
         stream_info = StreamInfo(type=StreamType.MOCK, config={})
 
         factory = StreamProviderFactory()
-        provider = factory.getProvider(info=stream_info)
+        provider = factory.get_provider(info=stream_info)
 
         result = provider.close()
         self.assertEqual(result, None)
@@ -29,7 +29,7 @@ class TestStreamProvider(unittest.TestCase):
         wrapper = PublishWrapper(action=SdkAction.CREATE, message_type=str(dict), content={})
 
         factory = StreamProviderFactory()
-        provider = factory.getProvider(info=stream_info)
+        provider = factory.get_provider(info=stream_info)
 
         result = provider.publish(wrapper=wrapper)
         self.assertEqual(result, None)

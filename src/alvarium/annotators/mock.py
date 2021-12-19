@@ -25,7 +25,7 @@ class MockAnnotator(Annotator):
         hashFactory = HashProviderFactory()
 
         try:
-            key = hashFactory.getProvider(self.hash).derive(data)
+            key = hashFactory.get_provider(self.hash).derive(data)
             host = socket.gethostname()
             sig = self.signature.public.type.__str__()
 

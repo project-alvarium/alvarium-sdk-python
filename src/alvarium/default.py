@@ -16,7 +16,7 @@ class DefaultSdk(Sdk):
         self.annotators = annotators
         self.config = config
 
-        self.stream = StreamProviderFactory().getProvider(self.config.stream)
+        self.stream = StreamProviderFactory().get_provider(self.config.stream)
         self.stream.connect()
 
         self.logger = logger
@@ -31,7 +31,7 @@ class DefaultSdk(Sdk):
 
 
     def mutate(self, old_data: bytes, new_data: bytes, properties: PropertyBag = None) -> None:
-        source_annotator = AnnotatorFactory().getAnnotator(kind=AnnotationType.SOURCE, sdk_info=self.config)
+        source_annotator = AnnotatorFactory().get_annotator(kind=AnnotationType.SOURCE, sdk_info=self.config)
         # TLS is ignored in mutate to prevent needless penalization
         # See https://github.com/project-alvarium/alvarium-sdk-go/issues/19
         annotations = [
@@ -49,7 +49,7 @@ class DefaultSdk(Sdk):
         wrapper = PublishWrapper(action=SdkAction.TRANSIT, message_type=type(annotaion_list).__name__, content=annotaion_list)
 
         self.stream.publish(wrapper=wrapper)
-        self.logger.debug("data transitioned")
+        self.logger.debug("data annotated and published successfully.")
     
     def close(self) -> None:
         self.stream.close()

@@ -1,12 +1,12 @@
 import socket
 
-from alvarium.annotators.contracts import Signable
 from alvarium.sign.exceptions import SignException
 from alvarium.sign.factories import SignProviderFactory
 from alvarium.contracts.annotation import Annotation, AnnotationType
 from alvarium.hash.contracts import HashType
 from alvarium.sign.contracts import KeyInfo, SignInfo
 from alvarium.utils import PropertyBag
+from .contracts import Signable
 from .utils import derive_hash, sign_annotation
 from .interfaces import Annotator
 from .exceptions import AnnotatorException
@@ -22,7 +22,7 @@ class PkiAnnotator(Annotator):
         """ Responsible for verifying the signature, returns true if the verification passed
             , false otherwise."""
         try:
-            sign_provider = SignProviderFactory().getProvider(sign_type=key.type)
+            sign_provider = SignProviderFactory().get_provider(sign_type=key.type)
         except SignException as e:
             raise AnnotatorException("cannot get sign provider.", e)
         

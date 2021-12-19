@@ -31,7 +31,7 @@ logging.basicConfig(level = logging.DEBUG)
 
 # construct annotators
 annotator_factory = AnnotatorFactory()
-annotators: List[Annotator] = [annotator_factory.getAnnotator(kind=annotation_type, sdk_info=sdk_info) \
+annotators: List[Annotator] = [annotator_factory.get_annotator(kind=annotation_type, sdk_info=sdk_info) \
                                for annotation_type in sdk_info.annotators]
 
 # construct sdk

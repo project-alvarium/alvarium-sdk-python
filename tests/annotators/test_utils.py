@@ -18,7 +18,7 @@ class TestUtils(unittest.TestCase):
     
     def test_sign_annotation_should_return_signature(self):
         factory = SignProviderFactory()
-        sign_provider: SignProvider = factory.getProvider(SignType.ED25519)
+        sign_provider: SignProvider = factory.get_provider(SignType.ED25519)
         
         private_key = KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key")
         annotation = Annotation(key="key", hash="hash", host="host", kind=AnnotationType.MOCK, 

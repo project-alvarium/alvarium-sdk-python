@@ -15,7 +15,7 @@ class TlsAnnotatorTest(unittest.TestCase):
         sign_Info = SignInfo(public=key_info, private=key_info)
         sdk_info = SdkInfo(annotators=[], signature=sign_Info, hash=HashInfo(type=HashType.SHA256), stream=None)
         factory = AnnotatorFactory()
-        annotator = factory.getAnnotator(kind=AnnotationType.TLS, sdk_info=sdk_info)
+        annotator = factory.get_annotator(kind=AnnotationType.TLS, sdk_info=sdk_info)
         string = "test data"
         data = bytes(string, 'utf-8')
 
@@ -25,7 +25,7 @@ class TlsAnnotatorTest(unittest.TestCase):
         with socket.create_connection((hostname, 443)) as sock:
             with context.wrap_socket(sock, server_hostname=hostname, do_handshake_on_connect=False) as ssock:
                 ctx = ImmutablePropertyBag({str(AnnotationType.TLS): ssock})
-                annotation = annotator.execute(ctx, data)
+                annotation = annotator.execute(data=data, ctx=ctx)
         
         self.assertEqual(annotation.is_satisfied, True)
         self.assertEqual(type(annotation), Annotation)
@@ -36,7 +36,7 @@ class TlsAnnotatorTest(unittest.TestCase):
         sign_Info = SignInfo(public=key_info, private=key_info)
         sdk_info = SdkInfo(annotators=[], signature=sign_Info, hash=HashInfo(type=HashType.SHA256), stream=None)
         factory = AnnotatorFactory()
-        annotator = factory.getAnnotator(kind=AnnotationType.TLS, sdk_info=sdk_info)
+        annotator = factory.get_annotator(kind=AnnotationType.TLS, sdk_info=sdk_info)
         string = "test data"
         data = bytes(string, 'utf-8')
         
@@ -47,7 +47,7 @@ class TlsAnnotatorTest(unittest.TestCase):
         with socket.create_connection((hostname, 443)) as sock:
             with context.wrap_socket(sock, server_hostname=hostname, do_handshake_on_connect=False) as ssock:
                 ctx = ImmutablePropertyBag({str(AnnotationType.TLS): ssock})
-                annotation = annotator.execute(ctx, data)
+                annotation = annotator.execute(data=data, ctx=ctx)
 
         self.assertEqual(annotation.is_satisfied, False)
         self.assertEqual(type(annotation), Annotation)

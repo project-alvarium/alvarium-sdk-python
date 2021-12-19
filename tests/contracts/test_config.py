@@ -14,8 +14,8 @@ class TestConfig(unittest.TestCase):
         hash = HashInfo(type=HashType.SHA256)
         signature = SignInfo(public=KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/public.key"),
                              private=KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key"))
-        stream = StreamInfo(type=StreamType.MQTT, config=MQTTConfig(clientId="alvarium-test", qos=0, user="",
-                            password="", isClean=False, topics=["alvarium-test-topic"], provider=ServiceInfo(
+        stream = StreamInfo(type=StreamType.MQTT, config=MQTTConfig(client_id="alvarium-test", qos=0, user="",
+                            password="", is_clean=False, topics=["alvarium-test-topic"], provider=ServiceInfo(
                                 host="test.mosquitto.org", port=1883, protocol="tcp"
                             )))
 
@@ -34,8 +34,8 @@ class TestConfig(unittest.TestCase):
         hash = HashInfo(type=HashType.SHA256)
         signature = SignInfo(public=KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/public.key"),
                              private=KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key"))
-        stream = StreamInfo(type=StreamType.MQTT, config=MQTTConfig(clientId="alvarium-test", qos=0, user="",
-                            password="", isClean=False, topics=["alvarium-test-topic"], provider=ServiceInfo(
+        stream = StreamInfo(type=StreamType.MQTT, config=MQTTConfig(client_id="alvarium-test", qos=0, user="",
+                            password="", is_clean=False, topics=["alvarium-test-topic"], provider=ServiceInfo(
                                 host="test.mosquitto.org", port=1883, protocol="tcp"
                             )))
         

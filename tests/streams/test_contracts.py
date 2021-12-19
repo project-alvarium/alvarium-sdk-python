@@ -6,7 +6,6 @@ from alvarium.streams.contracts import ServiceInfo, StreamInfo, StreamType
 class TestStreamInfo(unittest.TestCase):
 
     def test_to_json_should_return_json_representation(self):
-        # TODO (karim elghamry): add tests for MqttConfig
         stream_info = StreamInfo(type=StreamType.MQTT, config={})
         result = stream_info.to_json()
 
@@ -21,7 +20,6 @@ class TestStreamInfo(unittest.TestCase):
             info_json = json.loads(file.read())
         
         stream_info = StreamInfo.from_json(json.dumps(info_json))
-
         self.assertEqual(StreamType.MQTT, stream_info.type)
 
 class TestServiceInfo(unittest.TestCase):
