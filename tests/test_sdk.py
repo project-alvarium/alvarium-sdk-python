@@ -41,7 +41,7 @@ class TestSdk(unittest.TestCase):
         sdk: Sdk = DefaultSdk(annotators=annotators,config=sdk_info,logger=logger)
         sdk.close()
 
-    def test_sdk_should_create(self) -> None:
+    def test_sdk_should_create(self):
         sdk_info: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))
         annotator_factory = AnnotatorFactory()
         annotators = [annotator_factory.getAnnotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
@@ -53,6 +53,21 @@ class TestSdk(unittest.TestCase):
         test_data = b'test'
         sdk.create(data=test_data)
         sdk.close()
+    
+    def test_sdk_should_mutate(self):
+        sdk_info: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))
+        annotator_factory = AnnotatorFactory()
+        annotators = [annotator_factory.getAnnotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
+
+        logger = logging.getLogger(__name__)
+        logging.basicConfig(level = logging.DEBUG)
+        sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
+
+        old_data = b'old data'
+        new_data = b'new data'
+        sdk.mutate(old_data=old_data, new_data=new_data)
+        sdk.close()
+
 
     def test_sdk_should_transit(self) -> None:
         sdk_info: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))

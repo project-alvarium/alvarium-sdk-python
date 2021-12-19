@@ -43,10 +43,13 @@ sdk = DefaultSdk(annotators=annotators, logger=logger, config=sdk_info)
 signable = Signable(seed="helloo",
                 signature="B9E41596541933DB7144CFBF72105E4E53F9493729CA66331A658B1B18AC6DF5DA991" + \
                           "AD9720FD46A664918DFC745DE2F4F1F8C29FF71209B2DA79DFD1A34F50C")
-test_data = bytes(signable.to_json(), 'utf-8')
+old_data = bytes(signable.to_json(), 'utf-8')
+new_data = bytes(signable.to_json(), 'utf-8')
 
 # call sdk methods
-sdk.create(data=test_data)
+sdk.create(data=old_data)
+sdk.mutate(old_data=old_data, new_data=new_data)
+sdk.transit(data=new_data)
 
 # dispose sdk
 sdk.close()
