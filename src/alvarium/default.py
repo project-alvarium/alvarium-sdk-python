@@ -33,6 +33,10 @@ class DefaultSdk(Sdk):
         self.logger.debug("data mutated")
 
     def transit(self, data: bytes, properties: PropertyBag = None) -> None:
+        annotaion_list = AnnotationList(items=[ann.execute(data=data, ctx = properties) for ann in self.annotators])
+        wrapper = PublishWrapper(action=SdkAction.TRANSIT, message_type=type(annotaion_list).__name__, content=annotaion_list)
+
+        self.stream.publish(wrapper=wrapper)
         self.logger.debug("data transitioned")
     
     def close(self) -> None:

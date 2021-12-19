@@ -54,5 +54,18 @@ class TestSdk(unittest.TestCase):
         sdk.create(data=test_data)
         sdk.close()
 
+    def test_sdk_should_transit(self) -> None:
+        sdk_info: SdkInfo = SdkInfo.from_json(json.dumps(self.test_json))
+        annotator_factory = AnnotatorFactory()
+        annotators = [annotator_factory.getAnnotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
+
+        logger = logging.getLogger(__name__)
+        logging.basicConfig(level = logging.DEBUG)
+        sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
+
+        test_data = b'test'
+        sdk.transit(data=test_data)
+        sdk.close()
+
 if __name__ == "__main__":
     unittest.main()
