@@ -51,6 +51,13 @@ class DefaultSdk(Sdk):
         self.stream.publish(wrapper=wrapper)
         self.logger.debug("data annotated and published successfully.")
     
+    def publish(self, data: bytes, properties: PropertyBag = None) -> None:
+        annotation_list = AnnotationList(items=[ann.execute(data=data, ctx = properties) for ann in self.annotators])
+        wrapper = PublishWrapper(action=SdkAction.PUBLISH, message_type=type(annotation_list).__name__, content=annotation_list)
+        
+        self.stream.publish(wrapper=wrapper)
+        self.logger.debug("data annotated and published successfully.")
+
     def close(self) -> None:
         self.stream.close()
         self.logger.debug("sdk disposed")

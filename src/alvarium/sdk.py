@@ -17,5 +17,9 @@ class Sdk(ABC):
         pass
 
     @abstractmethod
+    def publish(self, data: bytes, properties: PropertyBag = None) -> None:
+        pass
+
+    @abstractmethod
     def close(self) -> None:
         pass

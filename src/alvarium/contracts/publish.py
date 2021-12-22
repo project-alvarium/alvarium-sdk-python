@@ -10,6 +10,7 @@ class SdkAction(Enum):
     CREATE = "create"
     MUTATE = "mutate"
     TRANSIT = "transit"
+    PUBLISH = "publish"
 
     def __str__(self) -> str:
         return f'{self.value}'
