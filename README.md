@@ -8,7 +8,7 @@ The SDK provides a minimal API -- DefaultSdk(), Create(), Mutate(), Transit(), P
 ### NewSdk()
 
 ```python
-def DefaultSdk(self, annotators: List[Annotator], config: SdkInfo, logger: Logger) --> DefaultSdk
+def DefaultSdk(self, annotators: List[Annotator], config: SdkInfo, logger: Logger) -> DefaultSdk
 ```
 
 Used to instantiate a new SDK instance with the specified list of annotators.
