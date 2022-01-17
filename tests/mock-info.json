@@ -1,0 +1,21 @@
+{
+  "annotators": ["mock", "mock"],
+  "hash": {
+    "type": "sha256"
+  },
+  "signature": {
+    "public": {
+      "type": "ed25519",
+      "path": "./tests/sign/keys/public.key"
+    },
+    "private": {
+      "type": "ed25519",
+      "path": "./tests/sign/keys/private.key"
+    }
+  },
+  "stream": {
+    "type": "mock",
+    "config": {
+    }
+  }
+}
