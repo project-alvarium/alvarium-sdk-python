@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 class AnnotationType(Enum):
     TPM = "tpm"
     PKI = "pki"
+    PKIHTTP = "pki-http"
     TLS = "tls"
     SOURCE = "src"
     MOCK = "mock"

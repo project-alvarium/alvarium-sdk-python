@@ -9,7 +9,7 @@ from alvarium.utils import ImmutablePropertyBag
 import ssl
 import socket
 
-class TlsAnnotatorTest(unittest.TestCase):
+class TestTlsAnnotator(unittest.TestCase):
     def test_tls_annotator_with_tls_connection_should_return_is_satisfied_true(self):
         key_info = KeyInfo(type=SignType.ED25519, path="./tests/sign/keys/private.key")
         sign_Info = SignInfo(public=key_info, private=key_info)

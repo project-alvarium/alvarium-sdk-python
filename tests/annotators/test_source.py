@@ -5,7 +5,7 @@ from alvarium.contracts.config import SdkInfo
 from alvarium.hash.contracts import HashInfo, HashType
 from alvarium.sign.contracts import KeyInfo, SignInfo, SignType
 
-class SourceAnnotatorTest(unittest.TestCase):
+class TestSourceAnnotator(unittest.TestCase):
 
     def test_execute_should_return_annotation(self):
         hash = HashType.SHA256
