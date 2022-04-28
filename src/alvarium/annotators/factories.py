@@ -7,6 +7,7 @@ from .tpm import TpmAnnotator
 from .pki import PkiAnnotator
 from .source import SourceAnnotator
 from .tls import TlsAnnotator
+from .pki_http import HttpPkiAnnotator
 
 class AnnotatorFactory():
     """A factory that provides multiple implementations of the Annotator interface"""
@@ -23,6 +24,7 @@ class AnnotatorFactory():
             return TlsAnnotator(hash=sdk_info.hash.type, signature=sdk_info.signature)
         elif kind == AnnotationType.PKI:
             return PkiAnnotator(hash=sdk_info.hash.type, sign_info=sdk_info.signature)
+        elif kind == AnnotationType.PKI_HTTP:
+            return HttpPkiAnnotator(hash=sdk_info.hash.type, sign_info=sdk_info.signature)
         else:
             raise AnnotatorException("Annotator type is not supported")
-            

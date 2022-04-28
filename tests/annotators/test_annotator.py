@@ -7,7 +7,7 @@ from alvarium.sign.contracts import KeyInfo, SignInfo, SignType
 from alvarium.annotators.factories import AnnotatorFactory
 from alvarium.utils import ImmutablePropertyBag
 
-class AnnotatorTest(unittest.TestCase):
+class TestAnnotator(unittest.TestCase):
 
     def test_mock_Annotator_Should_Return_Annotation(self):
         key_info = KeyInfo(type=SignType.NONE,path="path")
