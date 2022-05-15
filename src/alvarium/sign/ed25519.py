@@ -4,7 +4,7 @@ from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 
-class Ed25519ignProvider(SignProvider):
+class Ed25519SignProvider(SignProvider):
     """The implementation of the Ed25519 sign provider interface"""
 
     def sign(self, key: bytes, content: bytes) -> str:

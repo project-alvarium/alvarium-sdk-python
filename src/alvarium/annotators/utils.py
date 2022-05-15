@@ -1,3 +1,4 @@
+from alvarium.annotators.contracts import Signable
 from alvarium.hash.contracts import HashType
 from alvarium.hash.exceptions import HashException
 from alvarium.hash.factories import HashProviderFactory
@@ -27,3 +28,31 @@ def sign_annotation(key_info: KeyInfo, annotation: Annotation) -> str:
         raise AnnotatorException("cannot sign annotation.", e) 
     except OSError as e:
         raise AnnotatorException("cannot open key file.", e)
+
+def verify_signature(key: KeyInfo, signable: Signable) -> bool:
+        """ Responsible for verifying the signature, returns true if the verification passed
+            , false otherwise."""
+        try:
+            sign_provider = SignProviderFactory().get_provider(sign_type=key.type)
+        except SignException as e:
+            raise AnnotatorException("cannot get sign provider.", e)
+        
+        try:
+            with open(key.path, 'r') as file:
+                pub_key = file.read()
+
+                try:
+                    hex_pub_key = bytes.fromhex(pub_key)
+                except Exception as e:
+                    raise AnnotatorException("Cannot read Public Key File.",e)
+
+                try:
+                    hex_signature = bytes.fromhex(signable.signature)
+                except Exception as e:
+                    raise AnnotatorException("Invalid signature syntax: It is not in hex.",e)
+
+                return sign_provider.verify(key=hex_pub_key, 
+                                            content=bytes(signable.seed, 'utf-8'),
+                                            signed=hex_signature)
+        except OSError:
+            raise AnnotatorException("Cannot read Public Key File.")
