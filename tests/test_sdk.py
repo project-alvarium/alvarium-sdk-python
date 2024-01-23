@@ -4,6 +4,7 @@ from alvarium.contracts.config import SdkInfo
 from alvarium.annotators.factories import AnnotatorFactory
 from alvarium.sdk import Sdk
 from alvarium.default import DefaultSdk
+from alvarium.logging.factories import LoggerFactory
 
 class TestSdk(unittest.TestCase):
 
@@ -17,8 +18,7 @@ class TestSdk(unittest.TestCase):
         annotator_factory = AnnotatorFactory()
         annotators = [annotator_factory.get_annotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
 
-        logger = logging.getLogger(__name__)
-        logging.basicConfig(level = logging.DEBUG)
+        logger = LoggerFactory().get_logger(name=__name__, level=logging.DEBUG)
 
         sdk: Sdk = DefaultSdk(annotators=annotators,config=sdk_info,logger=logger)
         sdk.close()
@@ -28,8 +28,7 @@ class TestSdk(unittest.TestCase):
         annotator_factory = AnnotatorFactory()
         annotators = [annotator_factory.get_annotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
 
-        logger = logging.getLogger(__name__)
-        logging.basicConfig(level = logging.DEBUG)
+        logger = LoggerFactory().get_logger(name=__name__, level=logging.DEBUG)
         sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
 
         test_data = b'test'
@@ -41,8 +40,7 @@ class TestSdk(unittest.TestCase):
         annotator_factory = AnnotatorFactory()
         annotators = [annotator_factory.get_annotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
 
-        logger = logging.getLogger(__name__)
-        logging.basicConfig(level = logging.DEBUG)
+        logger = LoggerFactory().get_logger(name=__name__, level=logging.DEBUG)
         sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
 
         old_data = b'old data'
@@ -56,8 +54,7 @@ class TestSdk(unittest.TestCase):
         annotator_factory = AnnotatorFactory()
         annotators = [annotator_factory.get_annotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
 
-        logger = logging.getLogger(__name__)
-        logging.basicConfig(level = logging.DEBUG)
+        logger = LoggerFactory().get_logger(name=__name__, level=logging.DEBUG)
         sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
 
         test_data = b'test'
@@ -69,8 +66,7 @@ class TestSdk(unittest.TestCase):
         annotator_factory = AnnotatorFactory()
         annotators = [annotator_factory.get_annotator(kind=annotation_type, sdk_info=sdk_info) for annotation_type in sdk_info.annotators]
 
-        logger = logging.getLogger(__name__)
-        logging.basicConfig(level = logging.DEBUG)
+        logger = LoggerFactory().get_logger(name=__name__, level=logging.DEBUG)
 
         sdk = DefaultSdk(annotators=annotators, config=sdk_info, logger=logger)
 

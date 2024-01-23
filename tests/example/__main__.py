@@ -2,6 +2,8 @@
 import os
 import sys
 
+from alvarium.logging.factories import LoggerFactory
+
 PROJECT_PATH = os.getcwd()
 SOURCE_PATH = os.path.join(
     PROJECT_PATH,"src"
@@ -26,8 +28,7 @@ with open("./tests/example/sdk-config.json", "r") as file:
 sdk_info = SdkInfo.from_json(json.dumps(config["sdk"]))
 
 # construct logger
-logger = logging.getLogger(__name__)
-logging.basicConfig(level = logging.DEBUG)
+logger = LoggerFactory().get_logger(name=__name__, level=logging.DEBUG)
 
 # construct annotators
 annotator_factory = AnnotatorFactory()
